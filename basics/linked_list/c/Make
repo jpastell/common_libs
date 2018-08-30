@@ -1,0 +1,30 @@
+#
+# Link List Make file
+# Make file for the link list library
+# 
+# Created by Juan Pablo Castellanos on 26/8/18
+# Copyright © 2018 Juan Pablo Castellanos. All rights reserved.
+#
+
+#Compiler
+CC=gcc
+
+#Compilation flags
+CFLAGS=-Werror
+
+#Dependiencies for link list
+DEPS_LL = linked_list.h
+
+#Object files need it
+OBJ = main.o linked_list.o
+
+%.o: %.c $(DEPS_LL)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+llmain: $(OBJ)
+	$(CC) -o $@ $^ $(CFLAGS)
+
+clean:
+	-rm *.o llmain	
+
+	
