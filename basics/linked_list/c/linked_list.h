@@ -18,7 +18,7 @@
  ****************************************************************************/
 
 /** 
- * @file link_list.h
+ * @file linked_list.h
  * @author Juan Pablo Castellanos Flores
  * @date 26/8/18
  * @brief File containing data types and prototyped for a generic linked list
@@ -40,6 +40,7 @@
 typedef struct sData {
 	void* data_ptr;	/**< void ponter to the data stored. */
 	size_t size;	/**< sise of the data. */
+	void (*print_data) (void *);
 } data;
 
 /**
@@ -48,8 +49,8 @@ typedef struct sData {
  * contains data for a linked list node.
  */
 typedef struct sNode {
-	data value;	/**< data stored in the node*/
-	void* next;	/**< reference for the next node*/
+	data* value_ptr;	/**< data stored in the node*/
+	void* next;		/**< reference for the next node*/
 } node;
 
 
@@ -61,14 +62,23 @@ typedef struct sNode {
 
 typedef struct sLinkedList {
 	node* head;
-	unsigned int size;
+	size_t size;
 } linked_list;
 
 /*
  *Prototype definition
  */
 void delete_data(data* data_ptr);
-data* new_data(void* data_ptr, size_t size);
+data* new_data(void* data_ptr, size_t size,void (*print) (void *));
+linked_list* new_linked_list(data* data_ptr);
+int insert_data(linked_list* linked_list_ptr, data* data_ptr, size_t index);
+void print_linked_list(linked_list* linked_list_ptr);
+void delete_linked_list(linked_list* linked_list_ptr);
+data* get_data(linked_list* linked_list_ptr, size_t index);
+size_t get_size(linked_list* linked_list_ptr);
+static node* get_node_by_index(linked_list* linked_list_ptr, size_t index);
+data* delete_data_linked(linked_list* linked_list_ptr, size_t index);
+data* change_data(linked_list* linked_list_ptr, data* data_ptr, size_t index);
 
 
 #endif /* _LINKED_LIST_H */
